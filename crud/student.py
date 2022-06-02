@@ -9,7 +9,7 @@ from ..database import (
 
 async def retrieve_students():
     students_list,count = [],0
-    async for student in student_collection.find():
+    async for student in student_collection.find().skip(5).limit(5):
         address_by_sid = await address.get_address_by_sid(student["_id"])
         resp = utils.studentaddress_util(student,address_by_sid)
         students_list.append(resp)
